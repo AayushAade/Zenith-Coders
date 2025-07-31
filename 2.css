@@ -1,0 +1,192 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    overflow: visible;
+  background: linear-gradient(90deg, #1fa5b0,#006895 );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Floating Bubbles Background */
+.background-bubbles span {
+  position: absolute;
+  bottom: -100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+              inset -3px -3px 10px rgb(176, 176, 216);
+  animation: floatUp infinite linear;
+  /* transform: translate(150%, 0); */
+  opacity: 0.7;
+}
+
+.background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; }
+.background-bubbles span:nth-child(2) { left: 20%; animation-duration: 12s; }
+.background-bubbles span:nth-child(3) { left: 30%; animation-duration: 10s; }
+.background-bubbles span:nth-child(4) { left: 40%; animation-duration: 14s; }
+.background-bubbles span:nth-child(5) { left: 50%; animation-duration: 11s; }
+.background-bubbles span:nth-child(6) { left: 60%; animation-duration: 13s; }
+.background-bubbles span:nth-child(7) { left: 70%; animation-duration: 10s; }
+.background-bubbles span:nth-child(8) { left: 80%; animation-duration: 12s; }
+.background-bubbles span:nth-child(9) { left: 90%; animation-duration: 9s; }
+.background-bubbles span:nth-child(10) { left: 25%; animation-duration: 15s; }
+.background-bubbles span:nth-child(11) { left: 65%; animation-duration: 11s; }
+.background-bubbles span:nth-child(12) { left: 85%; animation-duration: 13s; }
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50vh);
+  }
+  100% {
+    transform: translateY(-120vh); /* go beyond top */
+    opacity: 0;
+  }
+}
+
+/* Login Box */
+.login-container {
+
+background-color:#dfdcd3 ;    
+padding: 2.5rem 2rem;
+  border-radius: 1rem;
+   box-shadow: 
+  inset 20px 20px 30px #8ec1b8, 
+  inset -20px -20px 30px #8ec1b8;
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+  position: relative;
+}
+
+/* Header & Branding */
+.site-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.emoji {
+  font-size: 3rem;
+  margin-right: 0.3rem;
+}
+
+.gradient-text {
+   background-color: rgb(6, 6, 65);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+}
+
+.site-tagline {
+  font-size: 0.95rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+/* Form Styling */
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #3b82f6;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-group input {
+  margin-right: 0.5rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signup-link a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 2rem 1.25rem;
+  }
+  .gradient-text {
+    font-size: 1.5rem;
+  }
+  .site-tagline {
+    font-size: 0.85rem;
+  }
+}
