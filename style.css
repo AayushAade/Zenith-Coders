@@ -160,3 +160,44 @@ body, html {
 .login-box button:hover {
   background-color: #007acc;
 }
+/* Floating Bubbles Background */
+.background-bubbles span {
+  position: absolute;
+  bottom: -100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+              inset -3px -3px 10px rgb(176, 176, 216);
+  animation: floatUp infinite linear;
+  /* transform: translate(150%, 0); */
+  opacity: 0.7;
+}
+
+.background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s;height:40px;width:40px; }
+.background-bubbles span:nth-child(2) { left: 20%; animation-duration: 12s; }
+.background-bubbles span:nth-child(3) { left: 30%; animation-duration: 10s; }
+.background-bubbles span:nth-child(4) { left: 40%; animation-duration: 14s; }
+.background-bubbles span:nth-child(5) { left: 50%; animation-duration: 11s; }
+.background-bubbles span:nth-child(6) { left: 60%; animation-duration: 13s; }
+.background-bubbles span:nth-child(7) { left: 70%; animation-duration: 10s; }
+.background-bubbles span:nth-child(8) { left: 80%; animation-duration: 12s; }
+.background-bubbles span:nth-child(9) { left: 90%; animation-duration: 9s; }
+.background-bubbles span:nth-child(10) { left: 25%; animation-duration: 15s; }
+.background-bubbles span:nth-child(11) { left: 65%; animation-duration: 11s; }
+.background-bubbles span:nth-child(12) { left: 85%; animation-duration: 13s; }
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50vh);
+  }
+  100% {
+    transform: translateY(-120vh); /* go beyond top */
+    opacity: 0;
+  }
+}
