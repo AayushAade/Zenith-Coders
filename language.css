@@ -6,8 +6,10 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #3b82f6, #9333ea);
-  min-height: 100vh;
+ background-image: url(sea_bed.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +17,7 @@ body {
 }
 
 .container {
-  background: #ffffff;
+  background: #e6ecf19c;
   padding: 3rem;
   border-radius: 1.5rem;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -136,4 +138,11 @@ header h1 {
   font-size: 1rem;
   color: #555;
   font-style: italic;
+}
+.logo-gif {
+  width: 60px; /* Adjust as needed */
+  height: auto;
+  object-fit: contain;
+  margin-right: 10px;
+  mix-blend-mode: normal;
 }
