@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>German Fruits & Vegetables</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #2e7d32;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #2e7d32aa;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .food-card:hover {
+      background: #f1fff1;
+      transform: translateY(-5px);
+    }
+
+    .food-card h2 {
+      font-size: 1.5rem;
+      color: #1b5e20;
+      margin-bottom: 8px;
+    }
+
+    .food-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fish -->
+  <div class="fish" id="fish">🐠</div>
+
+  <header>
+    <h1>🍎 German Fruits & Vegetables</h1>
+    <p>Click a card to hear its name in German</p>
+  </header>
+
+  <div class="food-grid">
+    <div class="food-card" onclick="playAudio('apfel')">
+      <h2>Apple</h2>
+      <p>Apfel</p>
+    </div>
+    <div class="food-card" onclick="playAudio('banane')">
+      <h2>Banana</h2>
+      <p>Banane</p>
+    </div>
+    <div class="food-card" onclick="playAudio('orange')">
+      <h2>Orange</h2>
+      <p>Orange</p>
+    </div>
+    <div class="food-card" onclick="playAudio('traube')">
+      <h2>Grapes</h2>
+      <p>Traube</p>
+    </div>
+    <div class="food-card" onclick="playAudio('erdbeere')">
+      <h2>Strawberry</h2>
+      <p>Erdbeere</p>
+    </div>
+    <div class="food-card" onclick="playAudio('tomate')">
+      <h2>Tomato</h2>
+      <p>Tomate</p>
+    </div>
+    <div class="food-card" onclick="playAudio('kartoffel')">
+      <h2>Potato</h2>
+      <p>Kartoffel</p>
+    </div>
+    <div class="food-card" onclick="playAudio('zwiebel')">
+      <h2>Onion</h2>
+      <p>Zwiebel</p>
+    </div>
+    <div class="food-card" onclick="playAudio('gurke')">
+      <h2>Cucumber</h2>
+      <p>Gurke</p>
+    </div>
+    <div class="food-card" onclick="playAudio('karotte')">
+      <h2>Carrot</h2>
+      <p>Karotte</p>
+    </div>
+  </div>
+
+  <!-- Audio files -->
+  <audio id="apfel" src="audio/apfel.mp3"></audio>
+  <audio id="banane" src="audio/banane.mp3"></audio>
+  <audio id="orange" src="audio/orange.mp3"></audio>
+  <audio id="traube" src="audio/traube.mp3"></audio>
+  <audio id="erdbeere" src="audio/erdbeere.mp3"></audio>
+  <audio id="tomate" src="audio/tomate.mp3"></audio>
+  <audio id="kartoffel" src="audio/kartoffel.mp3"></audio>
+  <audio id="zwiebel" src="audio/zwiebel.mp3"></audio>
+  <audio id="gurke" src="audio/gurke.mp3"></audio>
+  <audio id="karotte" src="audio/karotte.mp3"></audio>
+
+  <!-- JavaScript -->
+  <script>
+    function playAudio(id) {
+      const audio = document.getElementById(id);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+
+    // Fish follows cursor
+    const fish = document.getElementById('fish');
+    document.addEventListener('mousemove', (e) => {
+      fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  </script>
+
+</body>
+</html>

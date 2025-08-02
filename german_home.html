@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>German Home Appliances</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #fff8e1, #ffe082);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #6d4c41;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #6d4c41aa;
+    }
+
+    .appliance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .appliance-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .appliance-card:hover {
+      background: #fff3e0;
+      transform: translateY(-5px);
+    }
+
+    .appliance-card h2 {
+      font-size: 1.5rem;
+      color: #4e342e;
+      margin-bottom: 8px;
+    }
+
+    .appliance-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fish -->
+  <div class="fish" id="fish">🐠</div>
+
+  <header>
+    <h1>🏠 German Home Appliances</h1>
+    <p>Click a card to hear its German name</p>
+  </header>
+
+  <div class="appliance-grid">
+    <div class="appliance-card" onclick="playAudio('kuehlschrank')">
+      <h2>Fridge</h2>
+      <p>Kühlschrank</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('ofen')">
+      <h2>Oven</h2>
+      <p>Ofen</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('herd')">
+      <h2>Stove</h2>
+      <p>Herd</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('waschmaschine')">
+      <h2>Washing Machine</h2>
+      <p>Waschmaschine</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('staubsauger')">
+      <h2>Vacuum Cleaner</h2>
+      <p>Staubsauger</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('klimaanlage')">
+      <h2>Air Conditioner</h2>
+      <p>Klimaanlage</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('mikrowelle')">
+      <h2>Microwave</h2>
+      <p>Mikrowelle</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('fernseher')">
+      <h2>TV</h2>
+      <p>Fernseher</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('geschirrspueler')">
+      <h2>Dishwasher</h2>
+      <p>Geschirrspüler</p>
+    </div>
+    <div class="appliance-card" onclick="playAudio('wasserkocher')">
+      <h2>Kettle</h2>
+      <p>Wasserkocher</p>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="kuehlschrank" src="audio/kuehlschrank.mp3"></audio>
+  <audio id="ofen" src="audio/ofen.mp3"></audio>
+  <audio id="herd" src="audio/herd.mp3"></audio>
+  <audio id="waschmaschine" src="audio/waschmaschine.mp3"></audio>
+  <audio id="staubsauger" src="audio/staubsauger.mp3"></audio>
+  <audio id="klimaanlage" src="audio/klimaanlage.mp3"></audio>
+  <audio id="mikrowelle" src="audio/mikrowelle.mp3"></audio>
+  <audio id="fernseher" src="audio/fernseher.mp3"></audio>
+  <audio id="geschirrspueler" src="audio/geschirrspueler.mp3"></audio>
+  <audio id="wasserkocher" src="audio/wasserkocher.mp3"></audio>
+
+  <!-- JavaScript -->
+  <script>
+    function playAudio(id) {
+      const audio = document.getElementById(id);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+
+    // Fish follows cursor
+    const fish = document.getElementById('fish');
+    document.addEventListener('mousemove', (e) => {
+      fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>German Numbers</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #00334e;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #00334eaa;
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .number-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .number-card:hover {
+      background: #e0faff;
+      transform: translateY(-5px);
+    }
+
+    .number-card h2 {
+      font-size: 2rem;
+      color: #0074a6;
+      margin-bottom: 8px;
+    }
+
+    .number-card p {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    /* Fish that follows cursor */
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fish Follower -->
+  <div class="fish" id="fish">🐠</div>
+
+  <header>
+    <h1>🔢 German Numbers (1–10)</h1>
+    <p>Click any card to hear how it’s pronounced</p>
+  </header>
+
+  <div class="number-grid">
+    <div class="number-card" onclick="playAudio('eins')">
+      <h2>1</h2>
+      <p>Eins</p>
+    </div>
+    <div class="number-card" onclick="playAudio('zwei')">
+      <h2>2</h2>
+      <p>Zwei</p>
+    </div>
+    <div class="number-card" onclick="playAudio('drei')">
+      <h2>3</h2>
+      <p>Drei</p>
+    </div>
+    <div class="number-card" onclick="playAudio('vier')">
+      <h2>4</h2>
+      <p>Vier</p>
+    </div>
+    <div class="number-card" onclick="playAudio('fuenf')">
+      <h2>5</h2>
+      <p>Fünf</p>
+    </div>
+    <div class="number-card" onclick="playAudio('sechs')">
+      <h2>6</h2>
+      <p>Sechs</p>
+    </div>
+    <div class="number-card" onclick="playAudio('sieben')">
+      <h2>7</h2>
+      <p>Sieben</p>
+    </div>
+    <div class="number-card" onclick="playAudio('acht')">
+      <h2>8</h2>
+      <p>Acht</p>
+    </div>
+    <div class="number-card" onclick="playAudio('neun')">
+      <h2>9</h2>
+      <p>Neun</p>
+    </div>
+    <div class="number-card" onclick="playAudio('zehn')">
+      <h2>10</h2>
+      <p>Zehn</p>
+    </div>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="eins" src="audio/eins.mp3"></audio>
+  <audio id="zwei" src="audio/zwei.mp3"></audio>
+  <audio id="drei" src="audio/drei.mp3"></audio>
+  <audio id="vier" src="audio/vier.mp3"></audio>
+  <audio id="fuenf" src="audio/fuenf.mp3"></audio>
+  <audio id="sechs" src="audio/sechs.mp3"></audio>
+  <audio id="sieben" src="audio/sieben.mp3"></audio>
+  <audio id="acht" src="audio/acht.mp3"></audio>
+  <audio id="neun" src="audio/neun.mp3"></audio>
+  <audio id="zehn" src="audio/zehn.mp3"></audio>
+
+  <!-- JS -->
+  <script>
+    function playAudio(id) {
+      const audio = document.getElementById(id);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+
+    // Fish follow mouse
+    const fish = document.getElementById('fish');
+    document.addEventListener('mousemove', (e) => {
+      fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  </script>
+
+</body>
+</html>

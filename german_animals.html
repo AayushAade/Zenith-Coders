@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>German Animals</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #e8eaf6, #c5cae9);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1a237e;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #1a237eaa;
+    }
+
+    .animal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .animal-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .animal-card:hover {
+      background: #e6e9ff;
+      transform: translateY(-5px);
+    }
+
+    .animal-card h2 {
+      font-size: 1.5rem;
+      color: #303f9f;
+      margin-bottom: 8px;
+    }
+
+    .animal-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fish -->
+  <div class="fish" id="fish">🐠</div>
+
+  <header>
+    <h1>🐾 German Animals</h1>
+    <p>Click a card to hear its name in German</p>
+  </header>
+
+  <div class="animal-grid">
+    <div class="animal-card" onclick="playAudio('hund')">
+      <h2>Dog</h2>
+      <p>Hund</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('katze')">
+      <h2>Cat</h2>
+      <p>Katze</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('vogel')">
+      <h2>Bird</h2>
+      <p>Vogel</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('kuh')">
+      <h2>Cow</h2>
+      <p>Kuh</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('pferd')">
+      <h2>Horse</h2>
+      <p>Pferd</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('schwein')">
+      <h2>Pig</h2>
+      <p>Schwein</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('fisch')">
+      <h2>Fish</h2>
+      <p>Fisch</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('affe')">
+      <h2>Monkey</h2>
+      <p>Affe</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('hase')">
+      <h2>Rabbit</h2>
+      <p>Hase</p>
+    </div>
+    <div class="animal-card" onclick="playAudio('loewe')">
+      <h2>Lion</h2>
+      <p>Löwe</p>
+    </div>
+  </div>
+
+  <!-- Audio files -->
+  <audio id="hund" src="audio/hund.mp3"></audio>
+  <audio id="katze" src="audio/katze.mp3"></audio>
+  <audio id="vogel" src="audio/vogel.mp3"></audio>
+  <audio id="kuh" src="audio/kuh.mp3"></audio>
+  <audio id="pferd" src="audio/pferd.mp3"></audio>
+  <audio id="schwein" src="audio/schwein.mp3"></audio>
+  <audio id="fisch" src="audio/fisch.mp3"></audio>
+  <audio id="affe" src="audio/affe.mp3"></audio>
+  <audio id="hase" src="audio/hase.mp3"></audio>
+  <audio id="loewe" src="audio/loewe.mp3"></audio>
+
+  <!-- JavaScript -->
+  <script>
+    function playAudio(id) {
+      const audio = document.getElementById(id);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+
+    // Fish follows cursor
+    const fish = document.getElementById('fish');
+    document.addEventListener('mousemove', (e) => {
+      fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  </script>
+
+</body>
+</html>
