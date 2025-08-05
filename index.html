@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mookie Login</title>
   <link rel="stylesheet" href="2.css" />
+  <link rel="stylesheet" href="common.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Floating Animation Bubbles -->
@@ -16,7 +20,11 @@
   <!-- Login Form -->
   <div class="login-container">
     <div class="site-header">
-      <img src="fish_logo.gif" alt="Fish Logo" class="logo-gif" /> <span class="gradient-text">MOOKIE</span></h1>
+      <div class="header">
+  <img src="fish_logo.gif" alt="Fish Logo" class="logo-gif" />
+  <span class="gradient-text">MOOKIE</span>
+</div>
+
       <p class="site-tagline">Master languages, one word at a time.</p>
     </div>
 
@@ -38,6 +46,7 @@
       <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
     </form>
   </div>
+
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -51,3 +60,4 @@
   </script>
 </body>
 </html>
+
