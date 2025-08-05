@@ -1,22 +1,32 @@
+.container{
+    background: #e6ecf19c;
+    z-index: 10;
+    padding-bottom: 2rem;
+}
+.header{
+
+display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2vh;
+  padding: 1vh 2vw;
+  z-index: 10;}
 
 .gradient-text {
   
    background: linear-gradient(to right, #3b82f6, #9333ea);
-   margin-left: 2rem;
+  font-size: 2.8rem;
+  font-weight: 600;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
-  font-size: 3rem;
+  color: transparent;
 }
 .logo-gif {
-  position: absolute;
-  margin-left: -2rem;
-  width: 5rem;
-  height: 5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   object-fit: contain;
-  margin-right: 0rem;
-  vertical-align: middle;
 }
 /* Bubbles Background Animation */
 .background-bubbles span {
@@ -29,7 +39,7 @@
               inset -3px -3px 10px rgb(176, 176, 216);
   animation: floatUp infinite linear;
   opacity: 0.7;
-  z-index: 1;
+  z-index:1;
 }
 
 .background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; height: 40px; width: 40px; }
