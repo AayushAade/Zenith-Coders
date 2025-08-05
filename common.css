@@ -1,0 +1,72 @@
+
+.gradient-text {
+  
+   background: linear-gradient(to right, #3b82f6, #9333ea);
+   margin-left: 2rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-size: 3rem;
+}
+.logo-gif {
+  position: absolute;
+  margin-left: -2rem;
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  margin-right: 0rem;
+  vertical-align: middle;
+}
+/* Bubbles Background Animation */
+.background-bubbles span {
+  position: absolute;
+  bottom: -100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+              inset -3px -3px 10px rgb(176, 176, 216);
+  animation: floatUp infinite linear;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; height: 40px; width: 40px; }
+.background-bubbles span:nth-child(2) { left: 20%; animation-duration: 12s; height: 80px; width: 80px; }
+.background-bubbles span:nth-child(3) { left: 30%; animation-duration: 10s; height: 140px; width: 140px; }
+.background-bubbles span:nth-child(4) { left: 40%; animation-duration: 14s; height: 60px; width: 60px; }
+.background-bubbles span:nth-child(5) { left: 50%; animation-duration: 11s; height: 100px; width: 100px; }
+.background-bubbles span:nth-child(6) { left: 60%; animation-duration: 13s; height: 140px; width: 140px; }
+.background-bubbles span:nth-child(7) { left: 70%; animation-duration: 10s; }
+.background-bubbles span:nth-child(8) { left: 80%; animation-duration: 12s; }
+.background-bubbles span:nth-child(9) { left: 90%; animation-duration: 9s; }
+.background-bubbles span:nth-child(10) { left: 25%; animation-duration: 15s; }
+.background-bubbles span:nth-child(11) { left: 65%; animation-duration: 11s; }
+.background-bubbles span:nth-child(12) { left: 85%; animation-duration: 13s; }
+
+@keyframes floatUp {
+    0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50vh);
+  }
+  100% {
+    transform: translateY(-120vh); 
+    opacity: 0;
+  }
+}
+@media (max-width: 480px) {
+  .login-container {
+    padding: 2rem 1.25rem;
+  }
+  .gradient-text {
+    font-size: 1.5rem;
+  }
+  .site-tagline {
+    font-size: 0.85rem;
+  }
+}
