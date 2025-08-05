@@ -8,33 +8,15 @@
   <link rel="stylesheet" href="common.css">
 </head>
 <body>
+  <div class="main-content" id="mainContent">
+  <!-- all your header, container, bubbles etc -->
+
   <div class="background-bubbles">
     <span></span><span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <div class="hamburger-menu" onclick="toggleMenu()">
-    &#9776;
-  </div>
-
-  <nav class="side-menu" id="sideMenu">
-    <ul>
-      <li><a href="2.html">Logout</a></li>
-      <li><a href="language.html"></a></li>
-      
-      <li class="dropdown">
-        <a href="#" onclick="toggleDropdown(event)">Change Language ▼</a>
-        <ul class="dropdown-menu">
-          <li><a href="german.html">German</a></li>
-          <li><a href="french.html">French</a></li>
-          <li><a href="italian.html">Italian</a></li>
-          <li><a href="spanish.html">Spanish</a></li>
-        </ul>
-      </li>
-
-      <!-- <li><a href="about.html">About</a></li> -->
-    </ul>
-  </nav>
+  
 
   <div class="container">
     <header>
@@ -61,13 +43,16 @@
   <script>
   function toggleMenu() {
     const menu = document.getElementById('sideMenu');
-    const isOpen = menu.style.left === "0px";
-    menu.style.left = isOpen ? "-250px" : "0px";
+    const content = document.getElementById('mainContent');
+    const isOpen = menu.classList.contains('open');
 
-    // Add or remove the outside click listener
     if (!isOpen) {
+      menu.classList.add('open');
+      content.classList.add('blur');
       document.addEventListener('click', handleOutsideClick);
     } else {
+      menu.classList.remove('open');
+      content.classList.remove('blur');
       document.removeEventListener('click', handleOutsideClick);
     }
   }
@@ -75,20 +60,37 @@
   function handleOutsideClick(event) {
     const menu = document.getElementById('sideMenu');
     const hamburger = document.querySelector('.hamburger-menu');
+    const content = document.getElementById('mainContent');
 
-    // If click is outside menu and hamburger
     if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
-      menu.style.left = "-250px";
+      menu.classList.remove('open');
+      content.classList.remove('blur');
       document.removeEventListener('click', handleOutsideClick);
     }
   }
-
-  function toggleDropdown(event) {
-    event.preventDefault();
-    const dropdown = event.target.closest('.dropdown');
-    dropdown.classList.toggle('open');
-  }
 </script>
+</div>
+<div class="hamburger-menu" onclick="toggleMenu()">
+    &#9776;
+  </div>
 
+  <nav class="side-menu" id="sideMenu">
+    <ul>
+      <li><a href="index.html">Logout</a></li>
+      <!-- <li><a href="language.html"></a></li> -->
+      
+      <li class="dropdown">
+        <a href="#" onclick="toggleDropdown(event)">Change Language ▼</a>
+        <ul class="dropdown-menu">
+          <li><a href="german.html">German</a></li>
+          <li><a href="french.html">French</a></li>
+          <li><a href="italian.html">Italian</a></li>
+          <li><a href="spanish.html">Spanish</a></li>
+        </ul>
+      </li>
+
+      <!-- <li><a href="about.html">About</a></li> -->
+    </ul>
+  </nav>
 </body>
 </html>
