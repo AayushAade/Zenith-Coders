@@ -1,0 +1,19 @@
+body {
+    background-image: url(deep_sea1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.background-bubbles div {
+  position: absolute;
+  bottom: -100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+              inset -3px -3px 10px rgb(176, 176, 216);
+  
+  opacity: 0.7;
+  z-index:1;
+}
