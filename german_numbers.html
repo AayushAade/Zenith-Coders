@@ -6,23 +6,28 @@
   <title>German Numbers</title>
   <style>
     body {
-      background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
       color: #00334e;
       overflow-x: hidden;
+      background-image: url('deep_sea1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+      position: relative;
     }
 
     header {
       text-align: center;
-      padding: 30px 20px 10px;
+      padding: 5vh 2vw 2vh;
     }
 
     header h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 0.5rem;
     }
 
     header p {
@@ -33,104 +38,158 @@
     .number-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-      padding: 40px;
+      gap: 30px;
+      padding: 5vh 4vw;
       max-width: 960px;
       margin: 0 auto;
+      z-index: 2;
+      position: relative;
     }
 
     .number-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-      transition: transform 0.2s, background 0.3s;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at top left, #e0faff, #b0e0f0);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2),
+                  inset -2px -4px 8px rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      transition: transform 0.3s ease;
       cursor: pointer;
     }
 
-    .number-card:hover {
-      background: #e0faff;
-      transform: translateY(-5px);
-    }
-
     .number-card h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin: 0;
       color: #0074a6;
-      margin-bottom: 8px;
     }
 
     .number-card p {
       font-size: 1rem;
-      color: #333;
+      color: #00334e;
+      margin: 4px 0 0;
     }
 
-    /* Fish that follows cursor */
+    .number-card.clicked {
+      animation: rotate-bubble 0.5s ease-in-out;
+    }
+
+    @keyframes rotate-bubble {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Fish emoji that follows the cursor */
     .fish {
       position: fixed;
       left: 0;
       top: 0;
       font-size: 2.5rem;
       pointer-events: none;
-      transition: transform 0.15s ease;
+      transition: transform 0.1s ease;
       z-index: 9999;
     }
+
+    /* Optional animated background bubbles */
+    .background-bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .background-bubbles span {
+      position: absolute;
+      bottom: -100px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+                  inset -3px -3px 10px rgb(176, 176, 216);
+      opacity: 0.7;
+      animation: floatUp infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0.8; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    .background-bubbles span:nth-child(1) { left: 10%; animation-duration: 12s; }
+    .background-bubbles span:nth-child(2) { left: 25%; animation-duration: 15s; }
+    .background-bubbles span:nth-child(3) { left: 40%; animation-duration: 10s; }
+    .background-bubbles span:nth-child(4) { left: 60%; animation-duration: 13s; }
+    .background-bubbles span:nth-child(5) { left: 75%; animation-duration: 14s; }
+    .background-bubbles span:nth-child(6) { left: 90%; animation-duration: 11s; }
   </style>
 </head>
 <body>
 
-  <!-- Fish Follower -->
+  <!-- Floating Fish -->
   <div class="fish" id="fish">🐠</div>
 
+  <!-- Optional Animated Bubbles Background -->
+  <!-- Uncomment to use -->
+  <!--
+  <div class="background-bubbles">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  -->
+
+  <!-- Header -->
   <header>
     <h1>🔢 German Numbers (1–10)</h1>
-    <p>Click any card to hear how it’s pronounced</p>
+    <p>Click any bubble to hear its pronunciation</p>
   </header>
 
+  <!-- Number Bubbles -->
   <div class="number-grid">
-    <div class="number-card" onclick="playAudio('eins')">
-      <h2>1</h2>
-      <p>Eins</p>
+    <div class="number-card" onclick="playAudio('eins', event)">
+      <h2>1</h2><p>Eins</p>
     </div>
-    <div class="number-card" onclick="playAudio('zwei')">
-      <h2>2</h2>
-      <p>Zwei</p>
+    <div class="number-card" onclick="playAudio('zwei', event)">
+      <h2>2</h2><p>Zwei</p>
     </div>
-    <div class="number-card" onclick="playAudio('drei')">
-      <h2>3</h2>
-      <p>Drei</p>
+    <div class="number-card" onclick="playAudio('drei', event)">
+      <h2>3</h2><p>Drei</p>
     </div>
-    <div class="number-card" onclick="playAudio('vier')">
-      <h2>4</h2>
-      <p>Vier</p>
+    <div class="number-card" onclick="playAudio('vier', event)">
+      <h2>4</h2><p>Vier</p>
     </div>
-    <div class="number-card" onclick="playAudio('fuenf')">
-      <h2>5</h2>
-      <p>Fünf</p>
+    <div class="number-card" onclick="playAudio('fuenf', event)">
+      <h2>5</h2><p>Fünf</p>
     </div>
-    <div class="number-card" onclick="playAudio('sechs')">
-      <h2>6</h2>
-      <p>Sechs</p>
+    <div class="number-card" onclick="playAudio('sechs', event)">
+      <h2>6</h2><p>Sechs</p>
     </div>
-    <div class="number-card" onclick="playAudio('sieben')">
-      <h2>7</h2>
-      <p>Sieben</p>
+    <div class="number-card" onclick="playAudio('sieben', event)">
+      <h2>7</h2><p>Sieben</p>
     </div>
-    <div class="number-card" onclick="playAudio('acht')">
-      <h2>8</h2>
-      <p>Acht</p>
+    <div class="number-card" onclick="playAudio('acht', event)">
+      <h2>8</h2><p>Acht</p>
     </div>
-    <div class="number-card" onclick="playAudio('neun')">
-      <h2>9</h2>
-      <p>Neun</p>
+    <div class="number-card" onclick="playAudio('neun', event)">
+      <h2>9</h2><p>Neun</p>
     </div>
-    <div class="number-card" onclick="playAudio('zehn')">
-      <h2>10</h2>
-      <p>Zehn</p>
+    <div class="number-card" onclick="playAudio('zehn', event)">
+      <h2>10</h2><p>Zehn</p>
     </div>
   </div>
 
-  <!-- Audio Elements -->
+  <!-- Audio Files -->
   <audio id="eins" src="audio/eins.mp3"></audio>
   <audio id="zwei" src="audio/zwei.mp3"></audio>
   <audio id="drei" src="audio/drei.mp3"></audio>
@@ -142,17 +201,23 @@
   <audio id="neun" src="audio/neun.mp3"></audio>
   <audio id="zehn" src="audio/zehn.mp3"></audio>
 
-  <!-- JS -->
+  <!-- Script -->
   <script>
-    function playAudio(id) {
+    function playAudio(id, event) {
       const audio = document.getElementById(id);
+      const card = event.currentTarget;
+
       if (audio) {
         audio.currentTime = 0;
         audio.play();
       }
+
+      // Trigger rotation animation
+      card.classList.add('clicked');
+      setTimeout(() => card.classList.remove('clicked'), 500);
     }
 
-    // Fish follow mouse
+    // Fish follows mouse
     const fish = document.getElementById('fish');
     document.addEventListener('mousemove', (e) => {
       fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
