@@ -1,32 +1,30 @@
+
 .container{
-    background: #e6ecf19c;
-    z-index: 10;
-    padding-bottom: 2rem;
+   background-color: #edf3f2c7;
+  z-index: 3;
 }
-.header{
+.header{padding-bottom: 1rem;
 
-display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2vh;
-  padding: 1vh 2vw;
-  z-index: 10;}
-
+}
 .gradient-text {
   
    background: linear-gradient(to right, #3b82f6, #9333ea);
-  font-size: 2.8rem;
-  font-weight: 600;
+   margin-left: 2rem;
+   font-weight: 600;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
+  text-fill-color: transparent;
+  font-size: 3.3rem;
 }
 .logo-gif {
-  width: 4.5rem;
-  height: 4.5rem;
+  position: absolute;
+  margin-left: -2rem;
+  width: 5rem;
+  height: 5rem;
   object-fit: contain;
+  margin-right: 0rem;
+  vertical-align: middle;
 }
 /* Bubbles Background Animation */
 .background-bubbles span {
@@ -39,7 +37,7 @@ display: flex;
               inset -3px -3px 10px rgb(176, 176, 216);
   animation: floatUp infinite linear;
   opacity: 0.7;
-  z-index:1;
+  z-index: 1;
 }
 
 .background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; height: 40px; width: 40px; }
@@ -70,7 +68,7 @@ display: flex;
   }
 }
 @media (max-width: 480px) {
-  .login-container {
+  .container {
     padding: 2rem 1.25rem;
   }
   .gradient-text {
@@ -79,4 +77,47 @@ display: flex;
   .site-tagline {
     font-size: 0.85rem;
   }
+}
+.hamburger-menu {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  color: white;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-top: 4rem;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu ul li {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+
+.side-menu ul li a:hover {
+  color: #93c5fd;
 }
