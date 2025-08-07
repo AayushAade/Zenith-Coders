@@ -2,6 +2,30 @@
    background-color: #edf3f2c7;
   z-index: 3;
 }
+}
+.header{padding-bottom: 1rem;
+
+}
+.gradient-text {
+  
+   background: linear-gradient(to right, #3b82f6, #9333ea);
+   margin-left: 2rem;
+   font-weight: 600;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-size: 3.3rem;
+}
+.logo-gif {
+  /* position: absolute; */
+  /* margin-left: -15rem; */
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  /* margin-right: 0rem; */
+  vertical-align: middle;
+}
 * {
   margin: 0;
   padding: 0;
