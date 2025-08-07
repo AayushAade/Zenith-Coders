@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Language Selection</title>
+  <style>
+    /* Merged styles from your reference page and new navbar styles */
+    body {
+      background-image: url(deep_sea2.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #00334e;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Bubbles Background Animation */
+    .background-bubbles span {
+      position: absolute;
+      bottom: -100px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+                  inset -3px -3px 10px rgb(176, 176, 216);
+      animation: floatUp infinite linear;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; height: 40px; width: 40px; }
+    .background-bubbles span:nth-child(2) { left: 20%; animation-duration: 12s; height: 80px; width: 80px; }
+    .background-bubbles span:nth-child(3) { left: 30%; animation-duration: 10s; height: 140px; width: 140px; }
+    .background-bubbles span:nth-child(4) { left: 40%; animation-duration: 14s; height: 60px; width: 60px; }
+    .background-bubbles span:nth-child(5) { left: 50%; animation-duration: 11s; height: 100px; width: 100px; }
+    .background-bubbles span:nth-child(6) { left: 60%; animation-duration: 13s; height: 140px; width: 140px; }
+    .background-bubbles span:nth-child(7) { left: 70%; animation-duration: 10s; }
+    .background-bubbles span:nth-child(8) { left: 80%; animation-duration: 12s; }
+    .background-bubbles span:nth-child(9) { left: 90%; animation-duration: 9s; }
+    .background-bubbles span:nth-child(10) { left: 25%; animation-duration: 15s; }
+    .background-bubbles span:nth-child(11) { left: 65%; animation-duration: 11s; }
+    .background-bubbles span:nth-child(12) { left: 85%; animation-duration: 13s; }
+
+    @keyframes floatUp {
+        0% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-50vh);
+      }
+      100% {
+        transform: translateY(-120vh); 
+        opacity: 0;
+      }
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      position: fixed;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .hamburger {
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+      display: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #9333ea;
+    }
+    
+    /* Responsive navbar */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .nav-links li {
+        margin: 10px 0;
+      }
+    }
+
+    /* Main content styles */
+    header {
+      text-align: center;
+      padding: 80px 20px 10px; /* Adjusted padding to clear the fixed navbar */
+      z-index: 2;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #3b82f6, #9333ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-size: 3.3rem;
+      font-weight: bold;
+    }
+    
+    .logo-gif {
+      width: 5rem;
+      height: 5rem;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    
+    #selection-container {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      z-index: 2;
+      margin-bottom: 50px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 40px 0 0;
+    }
+
+    .section-tile {
+      background: #f0faff;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+    .section-tile:hover {
+      transform: translateY(-5px);
+      background: #e6f7ff;
+    }
+    .section-tile h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #0074a6;
+    }
+    .section-tile p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    h2 {
+      font-size: 1.8em;
+      color: #0074a6;
+    }
+    
+    /* Fish Follower */
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.2s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">🌊 Learn Languages</div>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="language.html">Change Language</a></li>
+        <li><a href="#">Test</a></li>
+        <li><a href="2.html">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+    
+  <div class="background-bubbles">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+
+  <div class="fish" id="fish">🐠</div>
+  
+  <header>
+    <h1 class="gradient-text">Language Selection</h1>
+    <p style="color: #00334e;">Choose a language to start learning!</p>
+  </header>
+
+  <div id="selection-container">
+    <div class="section-grid">
+      <div class="section-tile" onclick="window.location.href='german.html'">
+        <h3>🇩🇪 German</h3>
+        <p>Deutsch</p>
+      </div>
+      <div class="section-tile" onclick="window.location.href='spanish.html'">
+        <h3>🇪🇸 Spanish</h3>
+        <p>Español</p>
+      </div>
+      <div class="section-tile" onclick="window.location.href='italian.html'">
+        <h3>🇮🇹 Italian</h3>
+        <p>Italiano</p>
+      </div>
+      <div class="section-tile" onclick="window.location.href='french.html'">
+        <h3>🇫🇷 French</h3>
+        <p>Français</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JS for cursor-following fish
+    const fish = document.getElementById('fish');
+    document.addEventListener('mousemove', (e) => {
+      fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+
+    // JS for responsive hamburger menu
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

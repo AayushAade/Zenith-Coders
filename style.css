@@ -1,0 +1,154 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-image: url(sea_bed.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+/* Login Container */
+.container {
+  background-color: #edf3f2c7;    
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+  position: relative;
+}
+
+
+/* Header & Branding */
+.site-header {
+  
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+
+
+.site-tagline {
+  font-size: 0.95rem;
+  color:#3b82f6;
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+/* Form Styling */
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #3b82f6;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: rgb(219, 137, 30);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-group input {
+  margin-right: 0.5rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1fa5b0;
+  color: black;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #006895;
+}
+
+button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signup-link a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+/* Bubbles Background Animation */
+.background-bubbles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.background-bubbles span {
+  position: absolute;
+  bottom: -100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+              inset -3px -3px 10px rgb(176, 176, 216);
+  animation: floatUp infinite linear;
+  opacity: 0.7;
+  z-index: 1;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+}

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mookie - Aprende Español</title>
+  <style>
+    /* -------------------- GLOBAL STYLES -------------------- */
+    :root {
+      --primary-color: #0074a6;
+      --secondary-color: #f0faff;
+      --text-color: #00334e;
+      --highlight-color: #90e0ef;
+      --shadow-color: rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      background-image: url(deep_sea2.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-top: 60px; /* Push content down to avoid overlap with navbar */
+      position: relative;
+    }
+
+    /* Bubbles Background Animation */
+    .background-bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .background-bubbles span {
+      position: absolute;
+      bottom: -100px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+                  inset -3px -3px 10px rgb(176, 176, 216);
+      animation: floatUp infinite linear;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0.8; }
+        100% { transform: translateY(-120vh); opacity: 0; }
+    }
+    .background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; height: 40px; width: 40px; }
+    .background-bubbles span:nth-child(2) { left: 20%; animation-duration: 12s; height: 80px; width: 80px; }
+    .background-bubbles span:nth-child(3) { left: 30%; animation-duration: 10s; height: 140px; width: 140px; }
+    .background-bubbles span:nth-child(4) { left: 40%; animation-duration: 14s; height: 60px; width: 60px; }
+    .background-bubbles span:nth-child(5) { left: 50%; animation-duration: 11s; height: 100px; width: 100px; }
+    .background-bubbles span:nth-child(6) { left: 60%; animation-duration: 13s; height: 140px; width: 140px; }
+    .background-bubbles span:nth-child(7) { left: 70%; animation-duration: 10s; }
+    .background-bubbles span:nth-child(8) { left: 80%; animation-duration: 12s; }
+    .background-bubbles span:nth-child(9) { left: 90%; animation-duration: 9s; }
+    .background-bubbles span:nth-child(10) { left: 25%; animation-duration: 15s; }
+    .background-bubbles span:nth-child(11) { left: 65%; animation-duration: 11s; }
+    .background-bubbles span:nth-child(12) { left: 85%; animation-duration: 13s; }
+    
+    /* Navbar Styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(2, 20, 58, 0.993);
+      color: white;
+      z-index: 10000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1vh 2vw;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .hamburger {
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .nav-links li a:hover {
+      color: var(--highlight-color);
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 2vw;
+        background-color: rgba(0, 51, 78, 0.95);
+        flex-direction: column;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: none;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links li { margin: 10px 0; }
+    }
+
+    /* Fish Follower */
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+
+    /* Main Content Container */
+    #main-content {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+    
+    header {
+      padding: 30px 20px 10px;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1rem;
+      color: #00334eaa;
+    }
+    
+    /* -------------------- HOME PAGE STYLES -------------------- */
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 40px 40px 60px;
+    }
+    .section-tile {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 16px var(--shadow-color);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+    .section-tile:hover {
+      transform: translateY(-5px);
+      background: var(--secondary-color);
+    }
+    .section-tile h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+    }
+    .section-tile p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    /* -------------------- TOPIC PAGES STYLES -------------------- */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 30px;
+      padding: 5vh 4vw;
+      max-width: 960px;
+      margin: 0 auto;
+      z-index: 2;
+      position: relative;
+    }
+    .number-card {
+      height: 10rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at top left, #e0faff, #b0e0f0);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2),
+                  inset -2px -4px 8px rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .number-card:hover {
+      background: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    .number-card h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    .number-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+    .number-card.clicked {
+      animation: rotate-bubble 0.5s ease-in-out;
+    }
+
+    @keyframes rotate-bubble {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Navigation button styles */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .nav-buttons button {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .nav-buttons button:hover:not(:disabled) {
+      background-color: #005a80;
+    }
+    
+    .nav-buttons button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-bubbles">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+
+  <div class="fish" id="fish">🐠</div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">🌊 Aprende Español</div>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" onclick="renderPageWithIndex(0)">Inicio</a></li>
+        <li><a href="language.html">Cambiar de Idioma</a></li>
+        <li><a href="#">Prueba</a></li>
+        <li><a href="2.html">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main-content"></div>
+
+  <audio id="dynamic-audio"></audio>
+
+  <script>
+    // Dictionary of Spanish audio file paths
+    const audioPaths = {
+      // Numbers
+      'uno': 'audio/es/uno.mp3', 'dos': 'audio/es/dos.mp3', 'tres': 'audio/es/tres.mp3',
+      'cuatro': 'audio/es/cuatro.mp3', 'cinco': 'audio/es/cinco.mp3', 'seis': 'audio/es/seis.mp3',
+      'siete': 'audio/es/siete.mp3', 'ocho': 'audio/es/ocho.mp3', 'nueve': 'audio/es/nueve.mp3',
+      'diez': 'audio/es/diez.mp3',
+      // Animals
+      'perro': 'audio/es/perro.mp3', 'gato': 'audio/es/gato.mp3', 'pajaro': 'audio/es/pajaro.mp3',
+      'vaca': 'audio/es/vaca.mp3', 'caballo': 'audio/es/caballo.mp3', 'cerdo': 'audio/es/cerdo.mp3',
+      'pez': 'audio/es/pez.mp3', 'mono': 'audio/es/mono.mp3', 'conejo': 'audio/es/conejo.mp3',
+      'leon': 'audio/es/leon.mp3',
+      // Months
+      'enero': 'audio/es/enero.mp3', 'febrero': 'audio/es/febrero.mp3', 'marzo': 'audio/es/marzo.mp3',
+      'abril': 'audio/es/abril.mp3', 'mayo': 'audio/es/mayo.mp3', 'junio': 'audio/es/junio.mp3',
+      'julio': 'audio/es/julio.mp3', 'agosto': 'audio/es/agosto.mp3', 'septiembre': 'audio/es/septiembre.mp3',
+      'octubre': 'audio/es/octubre.mp3', 'noviembre': 'audio/es/noviembre.mp3', 'diciembre': 'audio/es/diciembre.mp3',
+      // Home Appliances
+      'nevera': 'audio/es/nevera.mp3', 'horno': 'audio/es/horno.mp3', 'estufa': 'audio/es/estufa.mp3',
+      'lavadora': 'audio/es/lavadora.mp3', 'aspiradora': 'audio/es/aspiradora.mp3',
+      'aire-acondicionado': 'audio/es/aire-acondicionado.mp3', 'microondas': 'audio/es/microondas.mp3', 'television': 'audio/es/television.mp3',
+      'lavavajillas': 'audio/es/lavavajillas.mp3', 'hervidor': 'audio/es/hervidor.mp3',
+      // Fruits & Vegetables
+      'manzana': 'audio/es/manzana.mp3', 'platano': 'audio/es/platano.mp3', 'naranja': 'audio/es/naranja.mp3',
+      'uva': 'audio/es/uva.mp3', 'fresa': 'audio/es/fresa.mp3', 'tomate': 'audio/es/tomate.mp3',
+      'patata': 'audio/es/patata.mp3', 'cebolla': 'audio/es/cebolla.mp3', 'pepino': 'audio/es/pepino.mp3',
+      'zanahoria': 'audio/es/zanahoria.mp3',
+      // Weekdays
+      'lunes': 'audio/es/lunes.mp3', 'martes': 'audio/es/martes.mp3', 'miercoles': 'audio/es/miercoles.mp3',
+      'jueves': 'audio/es/jueves.mp3', 'viernes': 'audio/es/viernes.mp3', 'sabado': 'audio/es/sabado.mp3',
+      'domingo': 'audio/es/domingo.mp3'
+    };
+
+    // Dictionary of page content
+    const pages = {
+      'beginner': `
+        <header>
+          <h1>🐠 MOOKIE - Español para Principiantes</h1>
+          <p>Selecciona un tema para empezar a aprender</p>
+        </header>
+        <div class="section-grid">
+          <div class="section-tile" onclick="renderPageWithIndex(1)">
+            <h3>🔢 Números</h3>
+            <p>Los Números</p>
+          </div>
+          <div class="section-tile" onclick="renderPageWithIndex(2)">
+            <h3>🗓️ Meses</h3>
+            <p>Los Meses</p>
+          </div>
+          <div class="section-tile" onclick="renderPageWithIndex(3)">
+            <h3>📅 Días de la semana</h3>
+            <p>Los Días de la Semana</p>
+          </div>
+          <div class="section-tile" onclick="renderPageWithIndex(4)">
+            <h3>🍎 Frutas y Verduras</h3>
+            <p>Frutas y Verduras</p>
+          </div>
+          <div class="section-tile" onclick="renderPageWithIndex(5)">
+            <h3>🐶 Animales</h3>
+            <p>Los Animales</p>
+          </div>
+          <div class="section-tile" onclick="renderPageWithIndex(6)">
+            <h3>🏠 Electrodomésticos</h3>
+            <p>Electrodomésticos</p>
+          </div>
+        </div>
+      `,
+      'numbers': `
+        <header>
+          <h1>🔢 Números en Español (1–10)</h1>
+          <p>Haz clic en una burbuja para escuchar su pronunciación</p>
+        </header>
+        <div class="grid-container">
+          <div class="number-card" onclick="playAudio('uno')"><h2>1</h2><p>Uno</p></div>
+          <div class="number-card" onclick="playAudio('dos')"><h2>2</h2><p>Dos</p></div>
+          <div class="number-card" onclick="playAudio('tres')"><h2>3</h2><p>Tres</p></div>
+          <div class="number-card" onclick="playAudio('cuatro')"><h2>4</h2><p>Cuatro</p></div>
+          <div class="number-card" onclick="playAudio('cinco')"><h2>5</h2><p>Cinco</p></div>
+          <div class="number-card" onclick="playAudio('seis')"><h2>6</h2><p>Seis</p></div>
+          <div class="number-card" onclick="playAudio('siete')"><h2>7</h2><p>Siete</p></div>
+          <div class="number-card" onclick="playAudio('ocho')"><h2>8</h2><p>Ocho</p></div>
+          <div class="number-card" onclick="playAudio('nueve')"><h2>9</h2><p>Nueve</p></div>
+          <div class="number-card" onclick="playAudio('diez')"><h2>10</h2><p>Diez</p></div>
+        </div>
+      `,
+      'animals': `
+        <header>
+          <h1>🐾 Animales en Español</h1>
+          <p>Haz clic en una tarjeta para escuchar su nombre en español</p>
+        </header>
+        <div class="grid-container">
+          <div class="number-card" onclick="playAudio('perro')"><h2>Dog</h2><p>Perro</p></div>
+          <div class="number-card" onclick="playAudio('gato')"><h2>Cat</h2><p>Gato</p></div>
+          <div class="number-card" onclick="playAudio('pajaro')"><h2>Bird</h2><p>Pájaro</p></div>
+          <div class="number-card" onclick="playAudio('vaca')"><h2>Cow</h2><p>Vaca</p></div>
+          <div class="number-card" onclick="playAudio('caballo')"><h2>Horse</h2><p>Caballo</p></div>
+          <div class="number-card" onclick="playAudio('cerdo')"><h2>Pig</h2><p>Cerdo</p></div>
+          <div class="number-card" onclick="playAudio('pez')"><h2>Fish</h2><p>Pez</p></div>
+          <div class="number-card" onclick="playAudio('mono')"><h2>Monkey</h2><p>Mono</p></div>
+          <div class="number-card" onclick="playAudio('conejo')"><h2>Rabbit</h2><p>Conejo</p></div>
+          <div class="number-card" onclick="playAudio('leon')"><h2>Lion</h2><p>León</p></div>
+        </div>
+      `,
+      'months': `
+        <header>
+          <h1>🗓️ Meses en Español</h1>
+          <p>Haz clic en un mes para escuchar cómo se pronuncia</p>
+        </header>
+        <div class="grid-container">
+          <div class="number-card" onclick="playAudio('enero')"><h2>January</h2><p>Enero</p></div>
+          <div class="number-card" onclick="playAudio('febrero')"><h2>February</h2><p>Febrero</p></div>
+          <div class="number-card" onclick="playAudio('marzo')"><h2>March</h2><p>Marzo</p></div>
+          <div class="number-card" onclick="playAudio('abril')"><h2>April</h2><p>Abril</p></div>
+          <div class="number-card" onclick="playAudio('mayo')"><h2>May</h2><p>Mayo</p></div>
+          <div class="number-card" onclick="playAudio('junio')"><h2>June</h2><p>Junio</p></div>
+          <div class="number-card" onclick="playAudio('julio')"><h2>July</h2><p>Julio</p></div>
+          <div class="number-card" onclick="playAudio('agosto')"><h2>August</h2><p>Agosto</p></div>
+          <div class="number-card" onclick="playAudio('septiembre')"><h2>September</h2><p>Septiembre</p></div>
+          <div class="number-card" onclick="playAudio('octubre')"><h2>October</h2><p>Octubre</p></div>
+          <div class="number-card" onclick="playAudio('noviembre')"><h2>November</h2><p>Noviembre</p></div>
+          <div class="number-card" onclick="playAudio('diciembre')"><h2>December</h2><p>Diciembre</p></div>
+        </div>
+      `,
+      'weekdays': `
+        <header>
+          <h1>📅 Días de la Semana en Español</h1>
+          <p>Haz clic en un día para escuchar su pronunciación</p>
+        </header>
+        <div class="grid-container">
+          <div class="number-card" onclick="playAudio('lunes')"><h2>Monday</h2><p>Lunes</p></div>
+          <div class="number-card" onclick="playAudio('martes')"><h2>Tuesday</h2><p>Martes</p></div>
+          <div class="number-card" onclick="playAudio('miercoles')"><h2>Wednesday</h2><p>Miércoles</p></div>
+          <div class="number-card" onclick="playAudio('jueves')"><h2>Thursday</h2><p>Jueves</p></div>
+          <div class="number-card" onclick="playAudio('viernes')"><h2>Friday</h2><p>Viernes</p></div>
+          <div class="number-card" onclick="playAudio('sabado')"><h2>Saturday</h2><p>Sábado</p></div>
+          <div class="number-card" onclick="playAudio('domingo')"><h2>Sunday</h2><p>Domingo</p></div>
+        </div>
+      `,
+      'fruits': `
+        <header>
+          <h1>🍎 Frutas y Verduras en Español</h1>
+          <p>Haz clic en una tarjeta para escuchar su nombre en español</p>
+        </header>
+        <div class="grid-container">
+          <div class="number-card" onclick="playAudio('manzana')"><h2>Apple</h2><p>Manzana</p></div>
+          <div class="number-card" onclick="playAudio('platano')"><h2>Banana</h2><p>Plátano</p></div>
+          <div class="number-card" onclick="playAudio('naranja')"><h2>Orange</h2><p>Naranja</p></div>
+          <div class="number-card" onclick="playAudio('uva')"><h2>Grapes</h2><p>Uva</p></div>
+          <div class="number-card" onclick="playAudio('fresa')"><h2>Strawberry</h2><p>Fresa</p></div>
+          <div class="number-card" onclick="playAudio('tomate')"><h2>Tomato</h2><p>Tomate</p></div>
+          <div class="number-card" onclick="playAudio('patata')"><h2>Potato</h2><p>Patata</p></div>
+          <div class="number-card" onclick="playAudio('cebolla')"><h2>Onion</h2><p>Cebolla</p></div>
+          <div class="number-card" onclick="playAudio('pepino')"><h2>Cucumber</h2><p>Pepino</p></div>
+          <div class="number-card" onclick="playAudio('zanahoria')"><h2>Carrot</h2><p>Zanahoria</p></div>
+        </div>
+      `,
+      'home': `
+        <header>
+          <h1>🏠 Electrodomésticos en Español</h1>
+          <p>Haz clic en una tarjeta para escuchar su nombre en español</p>
+        </header>
+        <div class="grid-container">
+          <div class="number-card" onclick="playAudio('nevera')"><h2>Fridge</h2><p>Nevera</p></div>
+          <div class="number-card" onclick="playAudio('horno')"><h2>Oven</h2><p>Horno</p></div>
+          <div class="number-card" onclick="playAudio('estufa')"><h2>Stove</h2><p>Estufa</p></div>
+          <div class="number-card" onclick="playAudio('lavadora')"><h2>Washing Machine</h2><p>Lavadora</p></div>
+          <div class="number-card" onclick="playAudio('aspiradora')"><h2>Vacuum Cleaner</h2><p>Aspiradora</p></div>
+          <div class="number-card" onclick="playAudio('aire-acondicionado')"><h2>Air Conditioner</h2><p>Aire acondicionado</p></div>
+          <div class="number-card" onclick="playAudio('microondas')"><h2>Microwave</h2><p>Microondas</p></div>
+          <div class="number-card" onclick="playAudio('television')"><h2>TV</h2><p>Televisión</p></div>
+          <div class="number-card" onclick="playAudio('lavavajillas')"><h2>Dishwasher</h2><p>Lavavajillas</p></div>
+          <div class="number-card" onclick="playAudio('hervidor')"><h2>Kettle</h2><p>Hervidor</p></div>
+        </div>
+      `
+    };
+
+    const pageOrder = ['beginner', 'numbers', 'months', 'weekdays', 'fruits', 'animals', 'home'];
+    let currentPageIndex = 0;
+
+    // Global Functions
+    function renderPage(pageName) {
+      document.getElementById('main-content').innerHTML = pages[pageName];
+      document.getElementById('navLinks').classList.remove('show');
+      
+      const mainContent = document.getElementById('main-content');
+      
+      // Add navigation buttons to all pages except the beginner page
+      if (pageName !== 'beginner') {
+        const navButtonsHtml = `
+          <div class="nav-buttons">
+            <button id="backButton" onclick="previousPage()" ${currentPageIndex <= 1 ? 'disabled' : ''}>Anterior</button>
+            <button id="forwardButton" onclick="nextPage()" ${currentPageIndex === pageOrder.length - 1 ? 'disabled' : ''}>Siguiente</button>
+          </div>
+        `;
+        mainContent.innerHTML += navButtonsHtml;
+      }
+    }
+    
+    function renderPageWithIndex(index) {
+        currentPageIndex = index;
+        renderPage(pageOrder[currentPageIndex]);
+    }
+    
+    function previousPage() {
+        if (currentPageIndex > 1) {
+            currentPageIndex--;
+            renderPage(pageOrder[currentPageIndex]);
+        } else {
+            // Special case for returning to the main "beginner" page
+            currentPageIndex = 0;
+            renderPage(pageOrder[currentPageIndex]);
+        }
+    }
+
+    function nextPage() {
+        if (currentPageIndex < pageOrder.length - 1) {
+            currentPageIndex++;
+            renderPage(pageOrder[currentPageIndex]);
+        }
+    }
+
+    function playAudio(id) {
+      const audio = document.getElementById('dynamic-audio');
+      const audioSrc = audioPaths[id];
+      if (audioSrc) {
+        audio.src = audioSrc;
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
+    }
+
+    // Fish follows mouse
+    const fish = document.getElementById('fish');
+    document.addEventListener('mousemove', (e) => {
+      fish.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+
+    // Initial page load
+    window.onload = () => {
+      renderPageWithIndex(0);
+    };
+  </script>
+
+</body>
+</html>
