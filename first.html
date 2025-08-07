@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Mookie</title>
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #343a40;
+            --white: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px; /* Adjust size of the GIF as needed */
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background-image: url('sea_bed.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            padding: 0.8rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--white);
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .main-content {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .main-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--text-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="#">
+                <img src="fish_logo.gif" alt="Mookie Logo"> Mookie
+            </a>
+        </div>
+        
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Dive into a new language with Mookie.</h1>
+            <p>Your journey to fluency begins here. Explore new cultures and connect with the world.</p>
+            <a href="language.html" class="cta-button">Let's Begin!</a>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <h2>About Mookie</h2>
+        <p>Mookie is a language learning platform designed to make mastering a new language both fun and effective. Our unique approach uses interactive lessons and real-world scenarios to help you learn faster and retain more. Whether you're a complete beginner or looking to refresh your skills, Mookie has the perfect course for you.</p>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mookie. All rights reserved.</p>
+        <p>Created by [Deep Dube, Aayush Aade,Ritika Badiger]</p>
+    </footer>
+</body>
+</html>
