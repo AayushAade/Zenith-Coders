@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>French Quiz Game</title>
+  <style>
+    
+    body {
+      background-image: url(deep_sea2.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #00334e;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Bubbles Background Animation */
+    .background-bubbles span {
+      position: absolute;
+      bottom: -100px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      box-shadow: inset 3px 3px 10px rgb(1, 1, 15),
+                  inset -3px -3px 10px rgb(176, 176, 216);
+      animation: floatUp infinite linear;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .background-bubbles span:nth-child(1) { left: 10%; animation-duration: 9s; height: 40px; width: 40px; }
+    .background-bubbles span:nth-child(2) { left: 20%; animation-duration: 12s; height: 80px; width: 80px; }
+    .background-bubbles span:nth-child(3) { left: 30%; animation-duration: 10s; height: 140px; width: 140px; }
+    .background-bubbles span:nth-child(4) { left: 40%; animation-duration: 14s; height: 60px; width: 60px; }
+    .background-bubbles span:nth-child(5) { left: 50%; animation-duration: 11s; height: 100px; width: 100px; }
+    .background-bubbles span:nth-child(6) { left: 60%; animation-duration: 13s; height: 140px; width: 140px; }
+    .background-bubbles span:nth-child(7) { left: 70%; animation-duration: 10s; }
+    .background-bubbles span:nth-child(8) { left: 80%; animation-duration: 12s; }
+    .background-bubbles span:nth-child(9) { left: 90%; animation-duration: 9s; }
+    .background-bubbles span:nth-child(10) { left: 25%; animation-duration: 15s; }
+    .background-bubbles span:nth-child(11) { left: 65%; animation-duration: 11s; }
+    .background-bubbles span:nth-child(12) { left: 85%; animation-duration: 13s; }
+
+    @keyframes floatUp {
+        0% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-50vh);
+      }
+      100% {
+        transform: translateY(-120vh); 
+        opacity: 0;
+      }
+    }
+
+    /* Navbar Styles */
+   .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(2, 20, 58, 0.993);
+      color: white;
+      z-index: 10000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1vh 2vw;
+      max-width: 100vw;
+      max-height:2.5rem ;
+      margin: auto;
+    }
+    .header{display: flex;
+        justify-content: space-between;
+
+        padding-bottom: 1rem;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+
+}
+.gradient-text {
+    
+    position: relative;
+  
+   background:rgb(36, 179, 201) ;
+   margin-top: 2rem;
+   
+   font-weight: 600;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-size: 2.5rem;
+}
+.logo-gif {
+  position: relative;
+  margin-top: 1.5rem;
+  /* margin-left: 1rem; */
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  /* margin-right: 0rem; */
+  vertical-align: middle;
+}
+    .hamburger {
+      font-size: 2rem;
+      cursor: pointer;
+      display: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .nav-links li a:hover {
+      color: var(--highlight-color);
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 2vw;
+        background-color: rgba(0, 51, 78, 0.95);
+        flex-direction: column;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: none;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links li { margin: 10px 0; }
+    }
+    
+    /* Responsive navbar */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .nav-links li {
+        margin: 10px 0;
+      }
+    }
+    /* Main content styles */
+    header {
+      text-align: center;
+      padding: 80px 20px 10px;
+      z-index: 2;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #3b82f6, #9333ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-size: 3.3rem;
+      font-weight: bold;
+    }
+    
+    .logo-gif {
+      width: 5rem;
+      height: 5rem;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    
+    #question-container, #topic-selection-container {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      z-index: 2;
+      margin-bottom: 50px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 40px 0 0;
+    }
+
+    .section-tile {
+      background: #f0faff;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+    .section-tile:hover {
+      transform: translateY(-5px);
+      background: #e6f7ff;
+    }
+    .section-tile h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #0074a6;
+    }
+    .section-tile p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    h2 {
+      font-size: 1.8em;
+      color: #0074a6;
+    }
+    
+    #lives-container {
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      font-size: 2.5em;
+      letter-spacing: -5px;
+      color: #fff;
+      z-index: 1001;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    
+    .option-button {
+      background-color: #f0faff;
+      color: #00334e;
+      border: 2px solid #0074a6;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .option-button:hover {
+      background-color: #e6f7ff;
+      transform: translateY(-2px);
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #0074a6;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005a80;
+    }
+    
+    .score-tracker {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    .correct {
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .wrong {
+      color: #dc3545;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .result-page h2 {
+      font-size: 2em;
+      color: #0074a6;
+    }
+    
+    .result-page button {
+      margin-top: 20px;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+ <nav class="navbar">
+  <div class="nav-container">
+    <div class="header">
+      <img src="fish_logo.gif" alt="Fish Logo" class="logo-gif" />
+      <span class="gradient-text">MOOKIE</span>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="first.html" onclick="renderPageWithIndex(0)">Home</a></li>
+      <li><a href="language.html">Change Language</a></li>
+      <li><a href="french.html">Learn French</a></li>
+      
+    </ul>
+  </div>
+</nav>
+    
+  <div class="background-bubbles">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+
+  <div class="fish" id="fish">🐠</div>
+
+  <div id="lives-container"></div>
+  
+  <header>
+    <h1 class="gradient-text">French Quiz Game</h1>
+    <p style="color: #00334e;">Test your knowledge on different topics!</p>
+  </header>
+
+  <div id="topic-selection-container"></div>
+  <div id="question-container" style="display: none;"></div>
+
+  <script>
+    const allTopics = {
+      nombres: [
+        { type: "fill", question: "What is 'un' in English?", answer: "one" },
+        { type: "mc", question: "The French word for 'two' is...", answer: "deux", options: ["un", "trois", "deux", "quatre"] },
+        { type: "fill", question: "What is 'trois' in English?", answer: "three" },
+        { type: "matchup", question: "The French word for 'four' is...", answer: "quatre", options: ["cinq", "deux", "six", "quatre"] },
+        { type: "fill", question: "What is 'cinq' in English?", answer: "five" },
+        { type: "mc", question: "The French word for 'six' is...", answer: "six", options: ["six", "sept", "cinq", "huit"] },
+        { type: "fill", question: "What is 'sept' in English?", answer: "seven" },
+        { type: "matchup", question: "The French word for 'eight' is...", answer: "huit", options: ["neuf", "huit", "dix", "quatre"] },
+        { type: "fill", question: "What is 'neuf' in English?", answer: "nine" },
+        { type: "mc", question: "The French word for 'ten' is...", answer: "dix", options: ["huit", "neuf", "dix", "onze"] }
+      ],
+      joursDeLaSemaine: [
+        { type: "mc", question: "What is 'Lundi' in English?", answer: "Monday", options: ["Sunday", "Monday", "Tuesday", "Wednesday"] },
+        { type: "fill", question: "The French word for 'Tuesday' is...", answer: "Mardi" },
+        { type: "mc", question: "What is 'Mercredi' in English?", answer: "Wednesday", options: ["Friday", "Thursday", "Wednesday", "Saturday"] },
+        { type: "matchup", question: "The French word for 'Thursday' is...", answer: "Jeudi", options: ["Vendredi", "Jeudi", "Lundi", "Samedi"] },
+        { type: "fill", question: "What is 'Vendredi' in English?", answer: "Friday" },
+        { type: "mc", question: "The French word for 'Saturday' is...", answer: "Samedi", options: ["Samedi", "Dimanche", "Mercredi", "Lundi"] },
+        { type: "fill", question: "What is 'Dimanche' in English?", answer: "Sunday" }
+      ],
+      mois: [
+        { type: "mc", question: "What is 'Janvier' in English?", answer: "January", options: ["March", "February", "January", "April"] },
+        { type: "fill", question: "The French word for 'February' is...", answer: "Février" },
+        { type: "mc", question: "What is 'Mars' in English?", answer: "March", options: ["May", "March", "June", "April"] },
+        { type: "fill", question: "The French word for 'April' is...", answer: "Avril" },
+        { type: "mc", question: "What is 'Mai' in English?", answer: "May", options: ["May", "June", "July", "August"] },
+        { type: "fill", question: "The French word for 'June' is...", answer: "Juin" },
+        { type: "mc", question: "What is 'Juillet' in English?", answer: "July", options: ["June", "August", "July", "September"] },
+        { type: "fill", question: "The French word for 'August' is...", answer: "Août" },
+        { type: "mc", question: "What is 'Septembre' in English?", answer: "September", options: ["September", "October", "November", "December"] },
+        { type: "fill", question: "The French word for 'October' is...", answer: "Octobre" },
+        { type: "mc", question: "What is 'Novembre' in English?", answer: "November", options: ["October", "November", "December", "January"] },
+        { type: "fill", question: "The French word for 'December' is...", answer: "Décembre" }
+      ],
+      animaux: [
+        { type: "fill", question: "The French word for 'dog' is...", answer: "chien" },
+        { type: "mc", question: "What is 'chat' in English?", answer: "cat", options: ["dog", "cat", "bird", "cow"] },
+        { type: "fill", question: "The French word for 'bird' is...", answer: "oiseau" },
+        { type: "mc", question: "What is 'vache' in English?", answer: "cow", options: ["horse", "pig", "cow", "lion"] },
+        { type: "fill", question: "The French word for 'horse' is...", answer: "cheval" },
+        { type: "mc", question: "What is 'cochon' in English?", answer: "pig", options: ["fish", "monkey", "rabbit", "pig"] },
+        { type: "fill", question: "The French word for 'fish' is...", answer: "poisson" },
+        { type: "mc", question: "What is 'singe' in English?", answer: "monkey", options: ["dog", "cat", "monkey", "lion"] },
+        { type: "fill", question: "The French word for 'rabbit' is...", answer: "lapin" },
+        { type: "mc", question: "What is 'lion' in English?", answer: "lion", options: ["rabbit", "lion", "cow", "horse"] }
+      ],
+      fruitsEtLegumes: [
+        { type: "fill", question: "The French word for 'apple' is...", answer: "pomme" },
+        { type: "mc", question: "What is 'banane' in English?", answer: "banana", options: ["banana", "grapes", "orange", "strawberry"] },
+        { type: "fill", question: "The French word for 'grapes' is...", answer: "raisins" },
+        { type: "mc", question: "What is 'orange' in English?", answer: "orange", options: ["strawberry", "tomato", "orange", "potato"] },
+        { type: "fill", question: "The French word for 'strawberry' is...", answer: "fraise" },
+        { type: "mc", question: "What is 'tomate' in English?", answer: "tomato", options: ["onion", "cucumber", "carrot", "tomato"] },
+        { type: "fill", question: "The French word for 'potato' is...", answer: "pomme de terre" },
+        { type: "mc", question: "What is 'oignon' in English?", answer: "onion", options: ["cucumber", "onion", "carrot", "apple"] },
+        { type: "fill", question: "The French word for 'cucumber' is...", answer: "concombre" },
+        { type: "mc", question: "What is 'carotte' in English?", answer: "carrot", options: ["banana", "grapes", "orange", "carrot"] }
+      ],
+      appareilsMenagers: [
+        { type: "fill", question: "The French word for 'fridge' is...", answer: "réfrigérateur" },
+        { type: "mc", question: "What is 'four' in English?", answer: "Oven", options: ["Stove", "Oven", "Kettle", "TV"] },
+        { type: "fill", question: "The French word for 'stove' is...", answer: "cuisinière" },
+        { type: "mc", question: "What is 'machine à laver' in English?", answer: "Washing Machine", options: ["Air conditioner", "Washing Machine", "Dishwasher", "Vacuum cleaner"] },
+        { type: "fill", question: "The French word for 'vacuum cleaner' is...", answer: "aspirateur" },
+        { type: "mc", question: "What is 'climatiseur' in English?", answer: "Air conditioner", options: ["Air conditioner", "Kettle", "TV", "Fridge"] },
+        { type: "fill", question: "The French word for 'kettle' is...", answer: "bouilloire" },
+        { type: "mc", question: "What is 'lave-vaisselle' in English?", answer: "Dishwasher", options: ["Oven", "Stove", "Dishwasher", "Fridge"] },
+        { type: "fill", question: "The French word for 'TV' is...", answer: "télévision" }
+      ]
+    };
+
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let lives = 3;
+    let currentTopicName = "";
+
+    function showTopicSelection() {
+      const topicContainer = document.getElementById("topic-selection-container");
+      const quizContainer = document.getElementById("question-container");
+      
+      quizContainer.style.display = 'none';
+      topicContainer.style.display = 'block';
+
+      topicContainer.innerHTML = `
+        <div class="section-grid">
+          <div class="section-tile" onclick="startQuiz('nombres')">
+            <h3>🔢 Nombres</h3>
+            <p>Numbers</p>
+          </div>
+          <div class="section-tile" onclick="startQuiz('mois')">
+            <h3>🗓️ Mois</h3>
+            <p>Months</p>
+          </div>
+          <div class="section-tile" onclick="startQuiz('joursDeLaSemaine')">
+            <h3>📅 Jours de la semaine</h3>
+            <p>Weekdays</p>
+          </div>
+          <div class="section-tile" onclick="startQuiz('fruitsEtLegumes')">
+            <h3>🍎 Fruits et Légumes</h3>
+            <p>Fruits & Vegetables</p>
+          </div>
+          <div class="section-tile" onclick="startQuiz('animaux')">
+            <h3>🐶 Animaux</h3>
+            <p>Animals</p>
+          </div>
+          <div class="section-tile" onclick="startQuiz('appareilsMenagers')">
+            <h3>🏠 Appareils ménagers</h3>
+            <p>Home Appliances</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function startQuiz(topicName) {
+      const topicContainer = document.getElementById("topic-selection-container");
+      const quizContainer = document.getElementById("question-container");
+      
+      topicContainer.style.display = 'none';
+      quizContainer.style.display = 'block';
+
+      currentTopicName = topicName;
+      questions = shuffle(allTopics[topicName]);
+      currentQuestionIndex = 0;
+      score = 0;
+      lives = 3;
+      updateLivesDisplay();
+      showQuestion();
+    }
+
+    function shuffle(array) {
+      const shuffledArray = [...array];
+      for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      }
+      return shuffledArray;
+    }
+
+    function showQuestion() {
+      const container = document.getElementById("question-container");
+      const totalQuestionsForTopic = questions.length;
+
+      if (currentQuestionIndex >= 10 || currentQuestionIndex >= totalQuestionsForTopic) {
+        showResult();
+        return;
+      }
+      
+      const q = questions[currentQuestionIndex];
+      let questionHtml = `<h2>${currentQuestionIndex + 1}. ${q.question}</h2>`;
+
+      if (q.type === "mc" || q.type === "matchup") {
+        questionHtml += `<div class="options-container">`;
+        q.options.forEach(option => {
+          questionHtml += `<button class="option-button" onclick="submitAnswer('${option}')">${option}</button>`;
+        });
+        questionHtml += `</div>`;
+      } else {
+        questionHtml += `<input id="userAnswer" type="text" placeholder="Your answer" autocomplete="off" />`;
+        questionHtml += `<br/><button onclick="submitAnswer(document.getElementById('userAnswer').value)">Submit</button>`;
+      }
+
+      container.innerHTML = `
+        <div class="question-box">
+          ${questionHtml}
+          <div id="feedback"></div>
+          <div class="score-tracker" style="color: #00334e; font-weight: bold;">Score: ${score}</div>
+        </div>
+      `;
+    }
+
+    function updateLivesDisplay() {
+      const livesContainer = document.getElementById("lives-container");
+      livesContainer.innerHTML = '❤️'.repeat(lives);
+    }
+
+    function submitAnswer(userAns) {
+      const q = questions[currentQuestionIndex];
+      const correctAns = q.answer.toLowerCase();
+      const feedbackDiv = document.getElementById("feedback");
+
+      if (userAns.trim().toLowerCase() === correctAns) {
+        feedbackDiv.innerHTML = `<div class="correct">✅ Correct!</div>`;
+        score++;
+        setTimeout(() => {
+          nextQuestion();
+        }, 1500);
+      } else {
+        feedbackDiv.innerHTML = `<div class="wrong">❌ Wrong! Correct answer was: <b>${q.answer}</b></div>`;
+        lives--;
+        updateLivesDisplay();
+        setTimeout(() => {
+          nextQuestion();
+        }, 2500);
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      if (lives <= 0) {
+        showLossScreen();
+      } else if (currentQuestionIndex < 10 && currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const container = document.getElementById("question-container");
+      container.innerHTML = `
+        <div class="result-page">
+          <h2>🎉 Quiz Complete!</h2>
+          <p style="color: #00334e;">Vous avez répondu à toutes les questions de ce sujet.</p>
+          <p style="color: #00334e;">Votre score final est : <b>${score} / ${questions.length > 10 ? 10 : questions.length}</b></p>
+          <button onclick="showTopicSelection()">Jouer à nouveau</button>
+        </div>
+      `;
+    }
+    
+    function showLossScreen() {
+      const container = document.getElementById("question-container");
+      container.innerHTML = `
+        <div class="result-page">
+          <h2>Game Over! 😩</h2>
+          <p style="color: #00334e;">Vous n'avez plus de vies.</p>
+          <p style="color: #00334e;">Votre score final est : <b>${score} / ${currentQuestionIndex}</b></p>
+          <button onclick="showTopicSelection()">Jouer à nouveau</button>
+        </div>
+      `;
+    }
+
+    
+    // JS for responsive hamburger menu
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+    
+    window.onload = showTopicSelection;
+  </script>
+</body>
+</html>

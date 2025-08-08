@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Italian Beginner</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    body {
+      background-image: url(deep_sea2.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #00334e;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #00334eaa;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 40px 40px 60px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-tile {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .section-tile:hover {
+      transform: translateY(-5px);
+      background: #f0faff;
+    }
+
+    .section-tile h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #0074a6;
+    }
+
+    .section-tile p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .fish {
+      position: fixed;
+      left: 0;
+      top: 0;
+      font-size: 2.5rem;
+      pointer-events: none;
+      transition: transform 0.2s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <div class="fish" id="fish">🐠</div>
+
+  <header>
+    <h1>🐠 MOOKIE - Italian Beginner</h1>
+    <p>Select a topic to start learning</p>
+  </header>
+
+  <div class="section-grid">
+    <div class="section-tile" onclick="location.href='italian_numbers.html'">
+      <h3>🔢 Numbers</h3>
+      <p>Numeri</p>
+    </div>
+    <div class="section-tile" onclick="location.href='italian_months.html'">
+      <h3>🗓️ Months</h3>
+      <p>Mesi</p>
+    </div>
+    <div class="section-tile" onclick="location.href='italian_weekdays.html'">
+      <h3>📅 Weekdays</h3>
+      <p>Giorni della settimana</p>
+    </div>
+    <div class="section-tile" onclick="location.href='italian_fruits.html'">
+      <h3>🍎 Fruits & Vegetables</h3>
+      <p>Frutta e verdura</p>
+    </div>
+    <div class="section-tile" onclick="location.href='italian_animals.html'">
+      <h3>🐶 Animals</h3>
+      <p>Animali</p>
+    </div>
+    <div class="section-tile" onclick="location.href='italian_home.html'">
+      <h3>🏠 Home Appliances</h3>
+      <p>Elettrodomestici</p>
+    </div>
+  </div>
+
+  
+
+</body>
+</html>

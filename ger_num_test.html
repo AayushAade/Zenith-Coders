@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>German Numbers Test</title>
+  <link rel="stylesheet" href="common2.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('deep_sea1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 2rem;
+      color: #00334e;
+    }
+    .test-section {
+      background: rgba(255,255,255,0.8);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    .question {
+      margin: 1rem 0;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0077b6;
+      color: white;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 German Numbers - Test Yourself!</h1>
+
+  <div class="test-section">
+    <h2>1. Multiple Choice (MCQ)</h2>
+    <div class="question">
+      What is "Five" in German?
+      <br/>
+      <input type="radio" name="mcq1" value="eins" /> Eins<br />
+      <input type="radio" name="mcq1" value="fuenf" /> Fünf<br />
+      <input type="radio" name="mcq1" value="vier" /> Vier
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>2. Fill in the Blank</h2>
+    <div class="question">
+      Fill in the German word for number 3:<br/>
+      <input type="text" id="fill1" placeholder="Enter here..." />
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>3. Arrange in Order</h2>
+    <div class="question">
+      Put these numbers in order (one to three):<br/>
+      <input type="text" placeholder="E.g. eins, zwei, drei" id="orderInput" />
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>4. Pronunciation</h2>
+    <div class="question">
+      Click to hear the English word "Seven". Then say it in German aloud:
+      <br/>
+      <button onclick="speakEnglish('Seven')">🔊 Hear English</button>
+      <button onclick="startVoiceRecognition()">🎤 Say in German</button>
+      <p id="spokenOutput"></p>
+    </div>
+  </div>
+
+  <script>
+    function speakEnglish(word) {
+      const msg = new SpeechSynthesisUtterance(word);
+      msg.lang = 'en-US';
+      window.speechSynthesis.speak(msg);
+    }
+
+    function startVoiceRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Your browser does not support speech recognition.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = "de-DE";
+      recognition.interimResults = false;
+
+      recognition.onresult = function(event) {
+        const result = event.results[0][0].transcript;
+        document.getElementById("spokenOutput").textContent = "You said: " + result;
+      };
+
+      recognition.start();
+    }
+  </script>
+</body>
+</html>
