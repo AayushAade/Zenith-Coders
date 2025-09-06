@@ -142,40 +142,47 @@ int main() {
     }
     cout << endl;
 
-    // --- Sorting by different criteria ---
+    int choice;
+    do {
+        cout << "--- Sort Products by ---" << endl;
+        cout << "1. Price (Insertion Sort)" << endl;
+        cout << "2. Rating (Bubble Sort)" << endl;
+        cout << "3. Popularity (Selection Sort)" << endl;
+        cout << "4. Reviews (Quick Sort)" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cout << endl;
 
-    Product productsByPrice[n];
-    for (int i = 0; i < n; i++) productsByPrice[i] = products[i];
-    insertionSort(productsByPrice, n);
-    displayAllProducts("Products Sorted by Price (Insertion Sort)", productsByPrice, n);
+        // Create a copy to avoid sorting the original data multiple times
+        Product productsCopy[n];
+        for (int i = 0; i < n; i++) productsCopy[i] = products[i];
 
-    Product productsByRating[n];
-    for (int i = 0; i < n; i++) productsByRating[i] = products[i];
-    bubbleSort(productsByRating, n);
-    displayAllProducts("Products Sorted by Rating (Bubble Sort)", productsByRating, n);
-
-    Product productsByPopularity[n];
-    for (int i = 0; i < n; i++) productsByPopularity[i] = products[i];
-    selectionSort(productsByPopularity, n);
-    displayAllProducts("Products Sorted by Popularity (Selection Sort)", productsByPopularity, n);
-
-    Product productsByReviews[n];
-    for (int i = 0; i < n; i++) productsByReviews[i] = products[i];
-    quickSort(productsByReviews, 0, n - 1);
-    displayAllProducts("Products Sorted by Reviews (Quick Sort)", productsByReviews, n);
-
-    // --- Search functionality ---
-    // cout << "--- Search by Price ---" << endl;
-    
-    // int searchPrice = 850;
-    // Product* foundProduct = binarySearchByPrice(productsByPrice, 0, n - 1, searchPrice);
-    // if (foundProduct != nullptr) {
-    //     cout << "Found product with price " << searchPrice << ":" << endl;
-    //     cout << "ID\t\tPrice\tRating\tPopularity\tReviews\n";
-    //     foundProduct->display();
-    // } else {
-    //     cout << "Product with price " << searchPrice << " not found." << endl;
-    // }
+        switch (choice) {
+            case 1:
+                insertionSort(productsCopy, n);
+                displayAllProducts("Products Sorted by Price (Insertion Sort)", productsCopy, n);
+                break;
+            case 2:
+                bubbleSort(productsCopy, n);
+                displayAllProducts("Products Sorted by Rating (Bubble Sort)", productsCopy, n);
+                break;
+            case 3:
+                selectionSort(productsCopy, n);
+                displayAllProducts("Products Sorted by Popularity (Selection Sort)", productsCopy, n);
+                break;
+            case 4:
+                quickSort(productsCopy, 0, n - 1);
+                displayAllProducts("Products Sorted by Reviews (Quick Sort)", productsCopy, n);
+                break;
+            case 0:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+                break;
+        }
+    } while (choice != 0);
 
     return 0;
 }
